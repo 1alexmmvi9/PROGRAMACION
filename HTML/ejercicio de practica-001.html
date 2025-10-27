@@ -1,0 +1,75 @@
+<script>
+        
+        /*
+            Programa que gestiona los partidos de baloncesto
+            v0.1 Alex Sytnyk
+            Programa que usa "math", "var", "mathrandom" para simular los partidos
+        */
+
+        // No se necesita aportar librerias
+
+        // Se piden nombres de equipos
+        var equipo1 = prompt("Introduce el nombre del primer equipo: ");
+        var equipo2 = prompt("Introduce el nombre del segundo equipo: ");
+
+        // Aqui escribo los marcadores iniciales
+        var marcador1 = 0;
+        var marcador2 = 0;
+
+        // Funcción para sumar puntos
+        function anotaPuntos(equipo, puntos){
+            if(equipo == 1){
+            marcador1 = marcador1 + puntos;
+            }else{
+            marcador2 = marcador2 + puntos;
+            }
+        }
+        // Funcion para sumar puntos
+        function anotaPuntos(equipo, puntos){
+    if(equipo == 1){
+      marcador1 = marcador1 + puntos;
+    }else{
+      marcador2 = marcador2 + puntos;
+    }
+  }
+for(let cuarto = 1; cuarto <= 4; cuarto ++){
+    document.write("<br><br>=== CUARTO ",cuarto," ===<br><br>");
+    for(let tirada = 1;tirada < 21;tirada++){                                       // Repite algo varias veces 
+            document.write("<br><br>Voy hacer la tirada número: ",tirada,"<br>");   // Saco un mensaje en pantalla 
+        
+        // Decido para quien es el punto
+            var puntos = 0
+            var paraequipo = Math.random();                                         // Creo un numero aleatorio entre 0 y 1 para decidir para quien se da el punto
+            if(paraequipo < 0.5)
+            {
+            document.write("La jugada se la lleva el equipo de ",equipo1,"<br>");
+            var PuntosAleatorios = Math.random();                                   // La variable de los puntos que segeneran aleatoriamente
+            if(PuntosAleatorios < 0.333){
+                puntos = 1
+                document.write("Puntos marcados: ",puntos);
+            }else if(PuntosAleatorios >=0.333 && PuntosAleatorios < 0.666){
+                puntos = 2
+                document.write("Puntos marcados: ",puntos);
+            }else{
+                puntos = 3
+                document.write("Puntos marcados: ",puntos);
+            }
+            }else{
+            document.write("La jugada se la lleva el equipo de ",equipo2,"<br>");
+            var PuntosAleatorios = Math.random();                                   // Creo un número 
+            if(PuntosAleatorios < 0.333){
+                puntos = 1
+                document.write("Puntos marcados: ",puntos);
+            }else if(PuntosAleatorios >=0.333 && PuntosAleatorios <0.666){
+                puntos = 2
+                document.write("Puntos marcados: ",puntos);
+            }else{
+                puntos = 3
+                document.write("Puntos marcados: ",puntos);
+            }
+        }
+    }
+    document.write("<br>Marcador tras el cuarto ",cuarto,": ");
+    document.write(equipo1, " - " ,marcador1, "  " ,equipo2, " - " ,marcador2, "<br>");
+}
+</script>

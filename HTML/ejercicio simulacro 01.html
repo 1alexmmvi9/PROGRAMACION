@@ -1,50 +1,74 @@
 <!DOCTYPE html>
-<html lang ="es">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <tittle>Fícha técnica del dispositivo</tittle>
+  <meta charset="UTF-8">
+  <title>Ficha técnica del dispositivo</title>
 </head>
 <body>
 <script>
-    /*
-        Programa de una ficha técnica de un dispositivo
-        v 0.1 Alex Sytnyk
-        Calcula el presupuesto con la IVA
-    */
+  /*
+    Programa: Ficha técnica del dispositivo
+    Versión: 1.0
+    Autor: Alex Sytnyk
+    Finalidad: Calcular el presupuesto y mostrar ficha técnica básica.
+  */
 
-    // Aqui pregunto al usuario los datos necesarios
-    var nombre = prompt("Introduce el nombre del dispositivo: ");
-    var precio_base = Number(prompt("Introduce el precio del dispositivo: "));
-    var almacenamiento_gb = Number(prompt("Introduce el almacenamiento del dispositivo: "));
-    var peso_g = Number(prompt("Introduce el peso del dispositivo en kilos: "));
-    var pantalla_pulgadas = Number(prompt("Introduce la diagonal de la pantalla en pulgadas: "));
-    var presupuesto_max = Number(prompt("Introduce el nombre del dispositivo: "));
+  // Entradas de datos
+  var nombre = prompt("Introduce el nombre del dispositivo:");
+  var precio_base = Number(prompt("Introduce el precio base del dispositivo (€):"));
+  var almacenamiento_gb = Number(prompt("Introduce el almacenamiento en GB:"));
+  var peso_g = Number(prompt("Introduce el peso del dispositivo en gramos:"));
+  var pantalla_pulgadas = Number(prompt("Introduce el tamaño de la pantalla en pulgadas:"));
+  var presupuesto_max = Number(prompt("Introduce tu presupuesto máximo (€):"));
 
-    // Aqui esta la constante del IVA
-    const IVA = 0.21;
-    
-    // Calculos
-    let total_iva = precio_base * 0.21;
-    let precio_total = precio_base + total_iva;
-    let almacenamiento_mb = almacenamiento_gb * 1024;
-    let peso_kg = peso_g / 1000;
+  // Constante del IVA
+  const IVA = 0.21;
 
-    // Comparaciones y calculos hechos
-    let excede_presupuesto = precio_total > presupuesto_max;
-    let pantalla_grande = pantalla_pulgadas >= 15.6;
-    let pantalla_pequeña = pantalla_pulgadas <=10.5;
-    let ligero = peso_kg < 1.2;
-    let pesado = peso_kg > 2.1;
-    let buena_compra = pantalla_grande && !excede_presupuesto;
+  // Cálculos principales
+  var total_iva = precio_base * IVA;          // Cálculo del IVA
+  var precio_total = precio_base + total_iva; // Precio total con IVA
+  var almacenamiento_mb = almacenamiento_gb * 1024;
+  var peso_kg = peso_g / 1000;
 
-    // Salidas 
+  // Comparaciones y booleanos
+  var excede_presupuesto = precio_total > presupuesto_max; // ¿Supera el presupuesto?
+  var pantalla_grande = pantalla_pulgadas >= 15.6;         // ¿Pantalla grande?
+  var es_ligero = peso_kg < 1.2;                           // ¿Ligero?
+  var buena_compra = pantalla_grande && !excede_presupuesto; // Pantalla grande y no excede
 
-    document.write("Nombre del dispositivo: ",nombre,"<br>");
-    document.write("Precio del dispositivo: ",precio_base,"<br>");
-    document.write("Almacenamiento del dispositivo en GB: ",almacenamiento_mb," y en MB:",almacenamiento_mb,"<br>");
-    document.write("Peso del dispositivo kilográmos: ",peso_kg," y en grámos: ",peso_mb,"<br>");
-    document.write("Dimensiones de la pantalla en pulgadas: ",pantalla_pulgadas,"<br>");
+  // Evaluación del peso con if/else if/else
+  var descripcion_peso;
+  if (peso_kg < 1.2) {
+    descripcion_peso = "ligero";
+  } else if (peso_kg > 2.1) {
+    descripcion_peso = "pesado";
+  } else {
+    descripcion_peso = "de peso medio";
+  }
 
+  // Salida formateada en el documento
+  document.write("=== FICHA TÉCNICA DEL DISPOSITIVO ===<br>");
+  document.write("Autor: Alex Sytnyk<br>");
+  document.write("Año: 2025<br><br>");
+
+  document.write("Nombre del dispositivo: " + nombre + "<br>");
+  document.write("Precio base: " + precio_base + " €<br>");
+  document.write("IVA (21%): " + total_iva + " €<br>");
+  document.write("Precio total: " + precio_total + " €<br>");
+  document.write("Almacenamiento: " + almacenamiento_gb + " GB (" + almacenamiento_mb + " MB)<br>");
+  document.write("Peso: " + peso_g + " g (" + peso_kg + " kg) — Es un dispositivo " + descripcion_peso + "<br>");
+  document.write("Pantalla: " + pantalla_pulgadas + " pulgadas<br><br>");
+
+  // Evaluación booleana
+  document.write("=== EVALUACIÓN ===<br>");
+  document.write("¿Excede el presupuesto?: " + excede_presupuesto + "<br>");
+  document.write("¿Pantalla grande (>=15.6)? " + pantalla_grande + "<br>");
+  document.write("¿Ligero (<1.2 kg)? " + es_ligero + "<br>");
+  document.write("¿Buena compra (pantalla grande y no excede presupuesto)? " + buena_compra + "<br>");
+
+  // También mostramos algunos datos en la consola
+  console.log("Precio total:", precio_total);
+  console.log("¿Excede el presupuesto?", excede_presupuesto);
 </script>
 </body>
 </html>

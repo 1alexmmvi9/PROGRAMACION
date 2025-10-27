@@ -1,0 +1,97 @@
+<script>
+  // Pedimos nombres de equipos
+  var equipo1 = prompt("Introduce el nombre del primer equipo:");
+  var equipo2 = prompt("Introduce el nombre del segundo equipo:");
+
+  // Marcador inicial
+  var marcador1 = 0;
+  var marcador2 = 0;
+
+  // Función para sumar puntos
+  function anotaPuntos(equipo, puntos){
+    if(equipo == 1){
+      marcador1 = marcador1 + puntos;
+    }else{
+      marcador2 = marcador2 + puntos;
+    }
+  }
+
+  // Simulamos 4 cuartos
+  for(let cuarto = 1; cuarto <= 4; cuarto++){
+    document.write("<br><br>=== CUARTO " + cuarto + " ===<br>");
+
+    // Cada cuarto tiene 10 jugadas
+    for(let jugada = 1; jugada <= 10; jugada++){
+      document.write("<br>Jugada " + jugada + "<br>");
+
+      var paraequipo = Math.random();
+      var puntos = 0;
+
+      // Decido puntos
+      var cuantospuntos = Math.random();
+      if(cuantospuntos < 0.3){
+        puntos = 1;
+      }else if(cuantospuntos < 0.6){
+        puntos = 2;
+      }else{
+        puntos = 3;
+      }
+
+      // Decido equipo
+      if(paraequipo < 0.5){
+        anotaPuntos(1,puntos);
+        document.write(equipo1 + " anota " + puntos + " puntos<br>");
+      }else{
+        anotaPuntos(2,puntos);
+        document.write(equipo2 + " anota " + puntos + " puntos<br>");
+      }
+    }
+
+    // Marcador tras cada cuarto
+    document.write("<br>Marcador tras el cuarto " + cuarto + ": ");
+    document.write(equipo1 + " " + marcador1 + " - " + equipo2 + " " + marcador2 + "<br>");
+  }
+
+  // Si hay empate → prórroga
+  var prorroga = 0;
+  while(marcador1 == marcador2){
+    prorroga++;
+    document.write("<br><br>=== PRÓRROGA " + prorroga + " ===<br>");
+
+    for(let jugada = 1; jugada <= 5; jugada++){
+      var paraequipo = Math.random();
+      var puntos = 0;
+
+      var cuantospuntos = Math.random();
+      if(cuantospuntos < 0.3){
+        puntos = 1;
+      }else if(cuantospuntos < 0.6){
+        puntos = 2;
+      }else{
+        puntos = 3;
+      }
+
+      if(paraequipo < 0.5){
+        anotaPuntos(1,puntos);
+        document.write(equipo1 + " anota " + puntos + " puntos<br>");
+      }else{
+        anotaPuntos(2,puntos);
+        document.write(equipo2 + " anota " + puntos + " puntos<br>");
+      }
+    }
+
+    document.write("<br>Marcador tras prórroga " + prorroga + ": ");
+    document.write(equipo1 + " " + marcador1 + " - " + equipo2 + " " + marcador2 + "<br>");
+  }
+
+  // Resultado final
+  document.write("<br><br>=== RESULTADO FINAL ===<br>");
+  document.write(equipo1 + ": " + marcador1 + "<br>");
+  document.write(equipo2 + ": " + marcador2 + "<br>");
+
+  if(marcador1 > marcador2){
+    document.write("<br>🏆 Ganador: " + equipo1);
+  }else{
+    document.write("<br>🏆 Ganador: " + equipo2);
+  }
+</script>

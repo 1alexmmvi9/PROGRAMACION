@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comentario: Condiciones salario / gusto</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;max-width:720px;margin:32px auto;padding:16px;color:#0b1220}
+    label{display:block;margin:12px 0 6px}
+    input[type=number], input[type=range]{width:100%}
+    .card{border:1px solid #e6e9ee;padding:16px;border-radius:10px;background:#fbfdff}
+    .output{margin-top:16px;padding:12px;border-radius:8px;background:#f4f7fb}
+    .example{margin-top:8px;font-size:0.95rem;color:#334155}
+    button{margin-top:12px;padding:8px 12px;border-radius:8px;border:0;background:#0b63ff;color:white;cursor:pointer}
+  </style>
+</head>
+<body>
+  <h1>Simulador: ¿Voy al trabajo?</h1>
+  <p>Este pequeño ejemplo muestra la frase condicional que quieres presentar a tu profesor en lenguaje HTML+JS. Cambia los valores y pulsa <strong>Evaluar</strong>.</p>
+
+  <div class="card">
+    <label for="salary">Salario anual (€)</label>
+    <input id="salary" type="number" value="7000" min="0" step="100" />
+
+    <label for="like">Cuánto me gusta el trabajo (%)</label>
+    <input id="like" type="range" min="0" max="100" value="60" />
+    <div class="example">Valor actual: <span id="likeVal">60</span>%</div>
+
+    <button id="eval">Evaluar</button>
+
+    <div class="output" id="result">
+      Introduce valores y pulsa <strong>Evaluar</strong>.
+    </div>
+  </div>
+
+  <script>
+    const salaryEl = document.getElementById('salary');
+    const likeEl = document.getElementById('like');
+    const likeVal = document.getElementById('likeVal');
+    const btn = document.getElementById('eval');
+    const result = document.getElementById('result');
+
+    // Actualizar valor mostrado del slider
+    likeEl.addEventListener('input', () => likeVal.textContent = likeEl.value);
+
+    // Lógica condicional interpretada a partir de tu enunciado.
+    // Reglas implementadas (puedes modificarlas):
+    // - Si salario < 7000 => No voy.
+    // - Si salario >= 7000 => existe un umbral mínimo de gusto para aceptar.
+    // - Umbrales por tramos (ejemplo):
+    //     salario >= 10000 -> umbralGusto = 50
+    //     7000 <= salario < 10000 -> umbralGusto = 60
+    // - Solo iré si (salario >= umbralSalario) AND (gusto >= umbralGusto)
+
+    function evaluar(salario, gusto){
+      const umbralSalario = 7000;
+      let umbralGusto;
+
+      if(salario < umbralSalario){
+        return {
+          acepta: false,
+          razon: `No iré: el salario ${salario}€ es menor que el mínimo exigido ${umbralSalario}€.`
+        }
+      }
+
+      // Ajuste de umbral según tramo de salario
+      if(salario >= 10000){
+        umbralGusto = 50;
+      } else {
+        umbralGusto = 60;
+      }
+
+      if(gusto < umbralGusto){
+        return {
+          acepta: false,
+          razon: `No iré: aunque el salario es ${salario}€, me gusta el trabajo solo ${gusto}%, que es inferior al umbral mínimo ${umbralGusto}% para ese salario.`
+        }
+      }
+
+      return {
+        acepta: true,
+        razon: `Iré: el salario ${salario}€ cumple y me gusta el trabajo ${gusto}% (>= ${umbralGusto}%).` 
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      const s = Number(salaryEl.value || 0);
+      const g = Number(likeEl.value || 0);
+      const res = evaluar(s, g);
+
+      // Frase final con el estilo del comentario que quieres mostrar
+      const frase = `"Con que gane más de 7.000 € y que el trabajo me guste al menos un ${res.acepta ? Math.max(60, (s>=10000?50:60)) : Math.min( (s>=10000?50:60), 60)}%, iré. Si gano menos de 7.000 € no iré; y si me gusta menos del umbral, tampoco iré aunque gane 7.000 €."`;
+
+      result.innerHTML = `
+        <strong>Resultado:</strong> ${res.acepta ? '<span style="color:green">ACEPTADO</span>' : '<span style="color:#c53030">NO ACEPTADO</span>'}
+        <div style="margin-top:8px">${res.razon}</div>
+        <div style="margin-top:8px"><strong>Frase sugerida para tu comentario (HTML):</strong>
+          <div style="margin-top:6px;padding:8px;background:#fff;border-radius:6px;border:1px dashed #d1d5db;font-family:monospace;font-size:0.95rem">${frase}</div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

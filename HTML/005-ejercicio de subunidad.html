@@ -1,0 +1,36 @@
+<script>
+        /*
+            Programa calculadora de plantas
+            v0.1 Alex Sytnyk
+            Este programa clasifica a las plantas según su altura
+        */
+
+        // En este caso no hay librerías que importar
+
+        // Declaro variables del programa
+        var altura_planta;
+        var etapa_crecimiento;
+
+        // Aqui vendrían las funciones o clases
+
+        // Método principal
+
+            // Introduzco datos
+            altura_planta = prompt("Dime la altura de la planta");
+            // Realizo cálculos
+            if(altura_planta < 10){
+                etapa_crecimiento = "La planta es un brote";
+            }else if(altura_planta >= 10 && altura_planta < 30){
+                etapa_crecimiento = "La planta es un brote";
+            }else if(altura_planta >= 30 && altura_planta < 100){
+                etapa_crecimiento = "La planta esta en su etapa adulta";
+            }else{
+                etapa_crecimiento = "La planta es un arbol grande";
+            }
+            // Ofrezco resultados
+            document.write(etapa_crecimiento);
+                
+            
+        
+             
+</script>
