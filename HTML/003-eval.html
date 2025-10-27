@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>016-formularios</title>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Formulario de contacto</h1>
+    </header>
+
+    <!-- Enlace interno al formulario -->
+    <a href="#formulario">Enlace al formulario</a>
+
+    <!-- Enlace externo a información sobre formularios HTML5 -->
+    <a href="https://developer.mozilla.org/es/docs/Learn/Forms">Información sobre formularios HTML5</a>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Formulario de contacto -->
+        <form id="formulario" action="enviar.html" method="post">
+            
+            <!-- Campo de texto -->
+            <label>Nombre:</label>
+            <input type="text" name="nombre" placeholder="Ingresa tu nombre">
+
+            <!-- Campo de texto para el correo -->
+            <label>Correo:</label>
+            <input type="email" name="correo" placeholder="Ingresa tu correo">
+
+            <!-- Área de texto -->
+            <label>Mensaje:</label>
+            <textarea name="mensaje" placeholder="Escribe tu mensaje"></textarea>
+
+            <!-- Lista de selección -->
+            <label>País:</label>
+            <select name="pais">
+                <option>España</option>
+                <option>México</option>
+                <option>Argentina</option>
+            </select>
+
+            <!-- Botón para enviar -->
+            <input type="submit" value="Enviar">
+
+        </form>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>Actividad sobre formularios en HTML</p>
+    </footer>
+
+</body>
+</html>
