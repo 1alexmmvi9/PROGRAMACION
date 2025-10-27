@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Ganancias</title>
+<style>
+  /* Estilo general tipo "liquid glass iOS 26" */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a 0%, #1a1a1a 100%);
+    color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 380px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  }
+
+  h1 {
+    text-align: center;
+    color: #00bfff;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+  }
+
+  label {
+    display: block;
+    margin-top: 12px;
+    color: #aaa;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1em;
+    outline: none;
+  }
+
+  input:focus {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 10px;
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    background: #009ad6;
+  }
+
+  .resultado {
+    margin-top: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    color: #aef;
+    font-size: 1.1em;
+  }
+
+  .resultado strong {
+    color: #00ffff;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Calculadora de Ganancias</h1>
+
+  <!-- Aquí defines los datos de cada producto -->
+  <label for="tipo1">Precio del tipo 1 (€):</label>
+  <input type="number" id="tipo1" value="100">
+  <label for="cantidad1">Cantidad:</label>
+  <input type="number" id="cantidad1" value="10">
+
+  <label for="tipo2">Precio del tipo 2 (€):</label>
+  <input type="number" id="tipo2" value="80">
+  <label for="cantidad2">Cantidad:</label>
+  <input type="number" id="cantidad2" value="5">
+
+  <label for="tipo3">Precio del tipo 3 (€):</label>
+  <input type="number" id="tipo3" value="50">
+  <label for="cantidad3">Cantidad:</label>
+  <input type="number" id="cantidad3" value="8">
+
+  <label for="tipo4">Precio del tipo 4 (€):</label>
+  <input type="number" id="tipo4" value="120">
+  <label for="cantidad4">Cantidad:</label>
+  <input type="number" id="cantidad4" value="3">
+
+  <label for="tipo5">Precio del tipo 5 (€):</label>
+  <input type="number" id="tipo5" value="200">
+  <label for="cantidad5">Cantidad:</label>
+  <input type="number" id="cantidad5" value="2">
+
+  <button onclick="calcularGanancias()">Calcular ganancias</button>
+
+  <div id="resultado" class="resultado"></div>
+</div>
+
+<script>
+  /*
+    Calculadora de ganancias
+    Autor: Alex Sytnyk
+    Versión: 1.0
+    Finalidad: Calcular las ganancias totales de 5 tipos de producto
+  */
+
+  function calcularGanancias() {
+    // Leer valores desde los inputs
+    var tipo1 = Number(document.getElementById("tipo1").value);
+    var cantidad1 = Number(document.getElementById("cantidad1").value);
+
+    var tipo2 = Number(document.getElementById("tipo2").value);
+    var cantidad2 = Number(document.getElementById("cantidad2").value);
+
+    var tipo3 = Number(document.getElementById("tipo3").value);
+    var cantidad3 = Number(document.getElementById("cantidad3").value);
+
+    var tipo4 = Number(document.getElementById("tipo4").value);
+    var cantidad4 = Number(document.getElementById("cantidad4").value);
+
+    var tipo5 = Number(document.getElementById("tipo5").value);
+    var cantidad5 = Number(document.getElementById("cantidad5").value);
+
+    // Calcular ganancias individuales
+    var ganancia1 = tipo1 * 0.25 * cantidad1;
+    var ganancia2 = tipo2 * 0.25 * cantidad2;
+    var ganancia3 = tipo3 * 0.25 * cantidad3;
+    var ganancia4 = tipo4 * 0.25 * cantidad4;
+    var ganancia5 = tipo5 * 0.25 * cantidad5;
+
+    // Calcular total
+    var ganancia_total = ganancia1 + ganancia2 + ganancia3 + ganancia4 + ganancia5;
+
+    // Mostrar resultados
+    document.getElementById("resultado").innerHTML =
+      "<strong>Ganancias por tipo:</strong><br>" +
+      "Tipo 1: " + ganancia1 + " €<br>" +
+      "Tipo 2: " + ganancia2 + " €<br>" +
+      "Tipo 3: " + ganancia3 + " €<br>" +
+      "Tipo 4: " + ganancia4 + " €<br>" +
+      "Tipo 5: " + ganancia5 + " €<br><br>" +
+      "<strong>Ganancia TOTAL: " + ganancia_total + " €</strong>";
+  }
+</script>
+
+</body>
+</html>

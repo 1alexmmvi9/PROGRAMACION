@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha técnica del dispositivo</title>
+    <style>
+        body {
+            background-color: #e0dede;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            color: #222;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #333;
+            letter-spacing: 1px;
+        }
+        h2 {
+            text-align: center;
+            font-weight: normal;
+            color: #555;
+        }
+        .ficha {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px auto;
+            width: 60%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            line-height: 1.6;
+        }
+        .dato {
+            font-weight: bold;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eaeaea;
+            border-radius: 10px;
+        }
+        .ok { color: green; font-weight: bold; }
+        .alert { color: #d9534f; font-weight: bold; }
+        .info { color: #007acc; font-weight: bold; }
+    </style>
+</head>
+<body>
+<script>
+    /*
+        Programa: Ficha técnica del dispositivo
+        Versión: 0.3
+        Autor: Alex Sytnyk
+        Finalidad: Mostrar ficha técnica con estilo y evaluación detallada
+    */
+
+    // Entradas
+    var nombre = prompt("Introduce el nombre del dispositivo: ");
+    var precio_base = Number(prompt("Introduce el precio del dispositivo (€): "));
+    var almacenamiento_gb = Number(prompt("Introduce el almacenamiento (GB): "));
+    var peso_g = Number(prompt("Introduce el peso del dispositivo (g): "));
+    var pantalla_pulgadas = Number(prompt("Introduce la diagonal de la pantalla (pulgadas): "));
+    var presupuesto_max = Number(prompt("Introduce tu presupuesto máximo (€): "));
+
+    // Constante del IVA
+    const IVA = 0.21;
+
+    // Cálculos
+    let total_iva = precio_base * IVA;
+    let precio_total = precio_base + total_iva;
+    let almacenamiento_mb = almacenamiento_gb * 1024;
+    let peso_kg = peso_g / 1000;
+
+    // Comparaciones
+    let excede_presupuesto = precio_total > presupuesto_max;
+    let pantalla_grande = pantalla_pulgadas >= 15.6;
+    let pantalla_pequena = pantalla_pulgadas <= 10.5;
+    let ligero = peso_kg < 1;
+    let pesado = peso_kg > 2;
+    let buena_compra = pantalla_grande && !excede_presupuesto;
+
+    // Evaluación del peso
+    let descripcion_peso;
+    if (ligero) {
+        descripcion_peso = "ligero";
+    } else if (pesado) {
+        descripcion_peso = "pesado";
+    } else {
+        descripcion_peso = "de peso medio";
+    }
+
+    // Traducción de resultados booleanos a texto bonito
+    let texto_presupuesto = excede_presupuesto
+        ? "<span class='alert'>⚠️ Excede el presupuesto</span>"
+        : "<span class='ok'>✅ No excede el presupuesto</span>";
+
+    let texto_pantalla = pantalla_grande
+        ? "<span class='info'>💡 Pantalla grande</span>"
+        : "<span class='info'>📱 Pantalla pequeña</span>";
+
+    let texto_buena_compra = buena_compra
+        ? "<span class='ok'>🟢 Buena compra (pantalla grande y dentro del presupuesto)</span>"
+        : "<span class='alert'>🔴 No es una buena compra (por precio o tamaño)</span>";
+
+    // === Salida formateada ===
+    document.write('<h1>📱 FICHA TÉCNICA DEL DISPOSITIVO</h1>');
+    document.write('<h2>Autor: Alex Sytnyk — Año 2025</h2>');
+    document.write('<div class="ficha">');
+    document.write('<p><span class="dato">Nombre del dispositivo:</span> ' + nombre + '</p>');
+    document.write('<p><span class="dato">Precio base:</span> ' + precio_base + ' €</p>');
+    document.write('<p><span class="dato">IVA (21%):</span> ' + total_iva.toFixed(2) + ' €</p>');
+    document.write('<p><span class="dato">Precio total:</span> ' + precio_total.toFixed(2) + ' €</p>');
+    document.write('<p><span class="dato">Almacenamiento:</span> ' + almacenamiento_gb + ' GB (' + almacenamiento_mb + ' MB)</p>');
+    document.write('<p><span class="dato">Peso:</span> ' + peso_kg.toFixed(2) + ' kg (' + peso_g + ' g) — <b>' + descripcion_peso + '</b></p>');
+    document.write('<p><span class="dato">Pantalla:</span> ' + pantalla_pulgadas + ' pulgadas</p>');
+    document.write('<p><span class="dato">Presupuesto máximo:</span> ' + presupuesto_max + ' €</p>');
+
+    document.write('<div class="resultado">');
+    document.write('<p>' + texto_presupuesto + '</p>');
+    document.write('<p>' + texto_pantalla + '</p>');
+    document.write('<p>' + texto_buena_compra + '</p>');
+    document.write('</div>');
+    document.write('</div>');
+</script>
+</body>
+</html>

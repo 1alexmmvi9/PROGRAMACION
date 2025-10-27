@@ -1,0 +1,32 @@
+<script>
+
+    /*
+        Es un programa de registro de productos
+        v 0.1 Alex Sytnyk
+        El siguiente programa calculara el IVA y comprobara el stock
+    */
+
+    // Declaro las variables 
+    var nombre = prompt("Introduce el nombre del producto: ");   // Variable de nombre
+    var precio = Number(prompt("Introduce el precio del producto: "));   // Variable de precio
+    var stock = Number(prompt("Introduce la cantidad que se desea: "));   // Variable de la cantidad que esta en stock
+
+    // Aqui se calcula el precio con IVA
+    var precioconIVA = precio * 1.21;
+    precioconIVA = Math.round(precioconIVA * 100) / 100;
+
+    // Aqui se muestra si esta en stock o no, el producto
+    var disponible = stock > 0;
+    if (stock < 5){
+        alert("El stock es bajo: ",stock,"unidades")
+    }
+
+    // Aqui se muestran todos los datos del producto
+    document.write("<h2>Datos del producto:</h2>");
+    document.write("<p>El nombre del producto es: ",nombre);
+    document.write("<p>El precio del producto es: ",precio);
+    document.write("<p>El precio del producto incluido el IVA es: ",precioconIVA);
+    document.write("<p>La cantidad en stock del producto es: ",stock);
+    document.write("<p>Disponibilidad: ",disponible);
+
+</script>

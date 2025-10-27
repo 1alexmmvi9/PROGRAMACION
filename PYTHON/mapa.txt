@@ -1,0 +1,46 @@
+C:\Users\OleksandrSytnyk\Desktop\Programación\apuntes
+C:\Users\OleksandrSytnyk\Desktop\Programación\arranco flask.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\bloggg.txt
+C:\Users\OleksandrSytnyk\Desktop\Programación\busca el mapa.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\cadena de prueba.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\condicion.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\despues.json
+C:\Users\OleksandrSytnyk\Desktop\Programación\escribir en archivo el contenido de la carpeta.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\leer archivo.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\leer json.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\mapa.txt
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\001.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\ejercicio simulacro 01.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\ejercicio simulacro mio gpt help.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\ejercicio.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\ejercicio1-5.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\pagina.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\programa de calculo productos.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\registro_producto.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\HTML\verks.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\LENGUAJE DE MARCAS\bases de marcas.html
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\001-escribir propiedades de una clase.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\001-propiedades.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\001-repaso de los datos.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\002-defino propiedad privada.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\003 constructores.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\003-calse cuenta bancaria.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\003-funcuines y clases.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\004 clientes.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\004-validacion.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\005-algo nuevo.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\005-largo.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\algo de gato.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\clase matematicas.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\clases animal.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\clases gatos.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\construcotor lo de gatos.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\desarollo.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\import math.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\nuevacosa.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\pagina.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\primeraclase.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\programa001.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\programita002.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\prueba.py
+C:\Users\OleksandrSytnyk\Desktop\Programación\PYTHON\prueba1-2.py

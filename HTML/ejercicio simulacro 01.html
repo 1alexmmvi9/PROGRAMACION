@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang ="es">
+<head>
+    <meta charset="UTF-8">
+    <tittle>Fícha técnica del dispositivo</tittle>
+</head>
+<body>
+<script>
+    /*
+        Programa de una ficha técnica de un dispositivo
+        v 0.1 Alex Sytnyk
+        Calcula el presupuesto con la IVA
+    */
+
+    // Aqui pregunto al usuario los datos necesarios
+    var nombre = prompt("Introduce el nombre del dispositivo: ");
+    var precio_base = Number(prompt("Introduce el precio del dispositivo: "));
+    var almacenamiento_gb = Number(prompt("Introduce el almacenamiento del dispositivo: "));
+    var peso_g = Number(prompt("Introduce el peso del dispositivo en kilos: "));
+    var pantalla_pulgadas = Number(prompt("Introduce la diagonal de la pantalla en pulgadas: "));
+    var presupuesto_max = Number(prompt("Introduce el nombre del dispositivo: "));
+
+    // Aqui esta la constante del IVA
+    const IVA = 0.21;
+    
+    // Calculos
+    let total_iva = precio_base * 0.21;
+    let precio_total = precio_base + total_iva;
+    let almacenamiento_mb = almacenamiento_gb * 1024;
+    let peso_kg = peso_g / 1000;
+
+    // Comparaciones y calculos hechos
+    let excede_presupuesto = precio_total > presupuesto_max;
+    let pantalla_grande = pantalla_pulgadas >= 15.6;
+    let pantalla_pequeña = pantalla_pulgadas <=10.5;
+    let ligero = peso_kg < 1.2;
+    let pesado = peso_kg > 2.1;
+    let buena_compra = pantalla_grande && !excede_presupuesto;
+
+    // Salidas 
+
+    document.write("Nombre del dispositivo: ",nombre,"<br>");
+    document.write("Precio del dispositivo: ",precio_base,"<br>");
+    document.write("Almacenamiento del dispositivo en GB: ",almacenamiento_mb," y en MB:",almacenamiento_mb,"<br>");
+    document.write("Peso del dispositivo kilográmos: ",peso_kg," y en grámos: ",peso_mb,"<br>");
+    document.write("Dimensiones de la pantalla en pulgadas: ",pantalla_pulgadas,"<br>");
+
+</script>
+</body>
+</html>
