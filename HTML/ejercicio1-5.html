@@ -1,0 +1,45 @@
+<script>
+/*
+<script>
+    var nombre = prompt("Introduce el nombre:");
+    var apellido = prompt("Introduce los apellidos:");
+    var edad = Number(prompt("Introduce la edad:"));
+    var color_pelo = prompt("Introduce el color de tu pelo:");
+    var color_ojos = prompt("Introduce el color de tus ojos:");
+    var guapedad = 0;
+    function guapedad = print("Si que estas guapo, la verdad!!!")
+    if (edad > 18),(color_pelo = "Rubio") {
+        gueapedad = True
+    }
+*/
+
+    var nombre = prompt("Introduce tu nombre:");
+    var apellido = prompt("Introduce tus apellidos:");
+    var edad = Number(prompt("Introduce tu edad:"));
+    var color_pelo = prompt("Introduce el color de tu pelo:");
+    var color_ojos = prompt("Introduce el color de tus ojos:");
+
+    // Normalizamos texto: quitamos acentos y pasamos a minúsculas
+    function limpiarTexto(texto) {
+        return texto
+            .toLowerCase()
+            .normalize("NFD") // separa acentos
+            .replace(/[\u0300-\u036f´`']/g, ""); // elimina acentos y comillas
+    }
+
+    color_pelo = limpiarTexto(color_pelo);
+    color_ojos = limpiarTexto(color_ojos);
+
+    // Función para imprimir si cumple las condiciones
+    function comprobarGuapedad() {
+        if (edad > 1 && color_pelo === "rubio" && color_ojos === "verdes") {
+            console.log("¡Sí que estás guapo, la verdad!!! 😎");
+            alert("¡Sí que estás guapo, la verdad!!! 😎");
+        } else {
+            console.log("Lo siento, no cumples todos los requisitos 😅");
+            alert("Lo siento, no cumples todos los requisitos 😅");
+        }
+    }
+
+    comprobarGuapedad();
+</script>
