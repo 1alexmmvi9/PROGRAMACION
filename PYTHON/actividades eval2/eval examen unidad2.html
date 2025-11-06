@@ -1,0 +1,49 @@
+<script/>
+/* 
+    Aforo Express - Entradas, filas y horario
+    v1.1 - Alex Sytnyk
+    Calcula las filas necesarias y muestra la fecha del evento.
+*/
+
+// Pedir número de asistentes
+var asistentes = prompt("Introduce el número de asistentes:");
+while (asistentes === "" || asistentes <= 0) {
+    asistentes = prompt("Por favor, introduce un número de asistentes mayor que 0:");
+}
+
+// Pedir asientos por fila
+var asientosPorFila = prompt("Introduce cuántos asientos hay por fila:");
+while (asientosPorFila === "" || asientosPorFila <= 0) {
+    asientosPorFila = prompt("Por favor, introduce un número de asientos por fila mayor que 0:");
+}
+
+// Convertir a número
+asistentes = Number(asistentes);
+asientosPorFila = Number(asientosPorFila);
+
+// Pedir fecha del evento
+var fechaTexto = prompt("Introduce la fecha y hora del evento:");
+var fechaEvento = new Date(fechaTexto);
+
+// Calcular filas que se necesitan
+var filas = Math.ceil(asistentes / asientosPorFila);
+
+// Calcular código de sesión
+var valor1 = 7.8, valor2 = 6.5, valor3 = 9.2;
+var media = (valor1 + valor2 + valor3) / 3;
+var codigoSesion = Math.round(media + Math.round(Math.PI * 100));
+
+// Mostrar los resultados
+document.write("<h2>Informe del evento</h2>");
+document.write("Asistentes: ",asistentes,"<br>");
+document.write("Asientos por fila: ",asientosPorFila,"<br>");
+document.write("Filas necesarias: ",filas,"<br><br>");
+
+document.write("<strong>Fecha y hora del evento:</strong><br>");
+document.write("Año: ",fechaEvento.getFullYear(),"<br>");
+document.write("Mes: ",(fechaEvento.getMonth() + 1),"<br>");
+document.write("Día: ",fechaEvento.getDate(),"<br>");
+document.write("Hora: ",fechaEvento.getHours(),":",fechaEvento.getMinutes(),":",fechaEvento.getSeconds(),"<br><br>");
+
+document.write("<strong>Código de sesión:</strong> ",codigoSesion);
+</script>

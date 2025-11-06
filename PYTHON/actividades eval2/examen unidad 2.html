@@ -1,0 +1,52 @@
+<script>
+    /*
+        Aforo Express — entradas, filas y horario
+        v0.1 - ALex Sytnyk
+    */
+
+// 1. Entrada de datos
+var asistentes = parseInt(prompt("Introduce el número de asistentes:"));
+if (asistentes <= 0 || asistentes != asistentes) {          // En esta fila he mirado en internet: (asistentes <= 0 || asistentes != asistentes)
+  alert("Número no válido. Se pondrá 1 por defecto.");
+  asistentes = 1;
+}
+
+var asientosPorFila = parseInt(prompt("Introduce cuántos asientos hay por fila:"));
+if (asientosPorFila <= 0 || asientosPorFila != asientosPorFila) {
+  alert("Número no válido. Se pondrá 1 por defecto.");
+  asientosPorFila = 1;
+}
+
+var fechaEventoStr = prompt("Introduce la fecha y hora del evento (ejemplo: 2025-11-10T18:30):");
+var fechaEvento = new Date(fechaEventoStr);
+
+// Si la fecha no es válida
+if (fechaEvento == "Invalid Date") {
+  alert("Fecha no válida. Se usará la fecha actual.");
+  fechaEvento = new Date();
+}
+
+// 2. Cálculos
+var filas = Math.ceil(asistentes / asientosPorFila);
+var mediaSatisfaccion = (7.8 + 6.5 + 9.2) / 3;
+var codigoSesion = Math.round(Math.PI * 100);           // En esta fila tambien lo he comprobado en internet ya que he cometido un error y me daba mal
+
+// 3. Salida de resultados
+console.log("=== INFORME DE EVENTO ===");
+console.log("Asistentes:", asistentes);
+console.log("Asientos por fila:", asientosPorFila);
+console.log("Filas necesarias:", filas);
+
+console.log("\n=== FECHA Y HORA DEL EVENTO ===");
+console.log("Año:", fechaEvento.getFullYear());
+console.log("Mes:", fechaEvento.getMonth() + 1);
+console.log("Día:", fechaEvento.getDate());
+console.log("Hora:", fechaEvento.getHours());
+console.log("Minutos:", fechaEvento.getMinutes());
+console.log("Segundos:", fechaEvento.getSeconds());
+
+console.log("\n=== DATOS ADICIONALES ===");
+console.log("Media de satisfacción:", Math.round(mediaSatisfaccion));
+console.log("Código de sesión:", codigoSesion);
+
+</script>
