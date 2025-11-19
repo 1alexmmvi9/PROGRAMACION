@@ -1,0 +1,631 @@
+from flask import Flask
+import mysql.connector
+
+app = Flask(__name__)
+
+@app.route("/")
+def inicio():
+    conexion = mysql.connector.connect(
+        host="localhost",
+        user="usuario_portafolio",
+        password="662046",
+        database="portafolioexamen"
+    )
+    cursor = conexion.cursor(dictionary=True)
+    cursor.execute("SELECT titulo, descripcion, fecha FROM piezasportafolio")
+    piezas = cursor.fetchall()
+    conexion.close()
+
+    html = '''
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portafolio — Plantilla de examen</title>
+  <style>
+    /* Reset sencillo */
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --accent:#0b6cff;
+      --muted:#6b7280;
+      --radius:12px;
+      --gap:1.25rem;
+      --maxw:1100px;
+      --pad:1rem;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+      padding:2rem 1rem;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* Contenedor principal centrado */
+    .site{
+      width:100%;
+      max-width:var(--maxw);
+      display:flex;
+      flex-direction:column;
+      gap:var(--gap);
+    }
+
+    /* ------------------ HEADER (Flexbox) ------------------ */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:calc(var(--pad) * 1.25);
+      background:linear-gradient(90deg, rgba(11,108,255,0.06), rgba(11,108,255,0.03));
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(11,108,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+
+    .brand{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#2ea3ff);
+      display:grid;place-items:center;color:white;font-weight:700;
+      font-size:1.05rem;
+      box-shadow:0 6px 12px rgba(2,6,23,0.06);
+    }
+    nav{display:flex;gap:1rem;align-items:center}
+    nav a{font-size:.95rem;text-decoration:none;color:var(--muted)}
+    nav a.primary{color:var(--accent);font-weight:600}
+
+    /* ------------------ MAIN (Grid) ------------------ */
+    main{
+      display:grid;
+      grid-template-columns:1fr 340px; /* contenido + barra lateral */
+      gap:var(--gap);
+      align-items:start;
+    }
+
+    /* Galería de tarjetas - justamente aqui utiliza Grid */
+    .gallery{
+      background:transparent;
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+      gap:1rem;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:10px;
+      padding:0.6rem;
+      box-shadow:0 6px 18px rgba(12,20,40,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+      min-height:220px;
+    }
+
+    .thumb{
+      width:100%;
+      aspect-ratio:16/9;
+      background:linear-gradient(90deg, #e6eefc, #f7f9ff);
+      border-radius:8px;
+      display:block;
+      overflow:hidden;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .card h3{margin:.2rem 0 .1rem 0;font-size:1rem}
+    .card p{margin:0;font-size:.9rem;color:var(--muted)}
+
+    .meta{
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+      font-size:.8rem;color:var(--muted);
+    }
+    .chip{
+      padding:.25rem .5rem;border-radius:999px;background:#f1f5f9;font-weight:600;font-size:.78rem
+    }
+
+    /* ------------------ SIDEBAR simple ------------------ */
+    aside{
+      background:var(--card);
+      padding:1rem;border-radius:10px;box-shadow:0 6px 18px rgba(12,20,40,0.04);
+      height:fit-content;
+    }
+    .profile{display:flex;gap:.75rem;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#dbeafe,#bfdbfe);display:grid;place-items:center}
+    .profile small{display:block;color:var(--muted)}
+
+    /* ------------------ FOOTER (Flexbox + artículos replicados)
+       El enunciado dice que dentro del footer debe haber un article de muestra con
+       título, descripción, fecha, categoría e imagen. Aquí he replicado varios articulos
+       para dar sensación de muchos artículos. */
+    footer{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      padding:1rem;
+      border-radius:var(--radius);
+    }
+
+    .footer-articles{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:0.8rem;
+    }
+
+    footer article{
+      background:var(--card);
+      padding:.6rem;border-radius:10px;display:flex;gap:.5rem;align-items:flex-start;box-shadow:0 6px 12px rgba(2,6,23,0.04)
+    }
+    footer article .f-thumb{width:80px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f3f4f6}
+    footer article h4{margin:0;font-size:.95rem}
+    footer article p{margin:0;font-size:.82rem;color:var(--muted)}
+    footer article .f-meta{font-size:.78rem;color:var(--muted);margin-top:.25rem}
+
+    /* ------------------ RESPONSIVE adjustments ------------------ */
+    @media (max-width:900px){
+      main{grid-template-columns:1fr}
+    }
+    @media (max-width:540px){
+      header{flex-direction:column;align-items:flex-start}
+      .logo{width:44px;height:44px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <!-- HEADER: logo + navegación (Flexbox) -->
+    <header>
+      <div class="brand">
+        <div class="logo">AS</div>
+        <div>
+          <div style="font-weight:700">Alex Sytnyk</div>
+          <small style="color:var(--muted)">Diseñador • Desarrollador</small>
+        </div>
+      </div>
+      <nav aria-label="Navegación principal">
+        <a href="#">Inicio</a>
+        <a href="#portfolio" class="primary">Portfolio</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <!-- MAIN: galería de piezas (Grid) + sidebar -->
+    <main>
+      <section>
+        <h2 style="margin:0 0 .75rem 0">Proyectos destacados</h2>
+        <div class="gallery" id="portfolio">
+
+          <!-- v1.0: Una tarjeta de ejemplo. v1.3: Replicar varias veces para similitud de muchos elementos -->
+          <article class="card">
+            <div class="thumb"><img src="descargar (1).jpeg" alt="miniatura proyecto 1"></div>
+            <h3>Proyecto 1</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Mar 2024</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (2).jpeg" alt="miniatura proyecto 2"></div>
+            <h3>Proyecto 2</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Jun 2024</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (3).jpeg" alt="miniatura proyecto 3"></div>
+            <h3>Proyecto 3</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Nov 2023</span></div>
+          </article>
+
+          <!-- Más tarjetas replicadas para "sensación de muchos artículos" -->
+          <article class="card">
+            <div class="thumb"><img src="descargar (4).jpeg" alt="miniatura proyecto 4"></div>
+            <h3>Proyecto 4</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Dic 2023</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (6).jpeg" alt="miniatura proyecto 5"></div>
+            <h3>Proyecto 5</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>May 2024</span></div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- SIDEBAR: información breve del autor -->
+      <aside>
+        <div class="profile">
+          <div class="avatar">AS</div>
+          <div>
+            <strong>Alex Sytnyk</strong>
+            <small>Valencia • Estudiante • CEAC FP</small>
+          </div>
+        </div>
+        <hr style="margin:.75rem 0">
+        <p style="margin:0;color:var(--muted);font-size:.94rem">Herramientas: HTML5 • CSS3 (Flexbox/Grid) • JS básico</p>
+      </aside>
+
+    </main>
+
+    <!-- FOOTER: contiene artículos replicados con datos pedidos en el enunciado -->
+    <footer>
+      <h3 style="margin:0">Archivo: últimas piezas</h3>
+      <div class="footer-articles">
+
+        <!-- ARTICLE DE MUESTRA (repetido varias veces) -->
+        <article>
+          <div class="f-thumb"><img src="descargar (5).jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 1</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-03-12 • Categoría: Diseño</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="descargar.jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 2</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-06-02 • Categoría: Desarrollo</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="Entre art et architecture, les mondes surréalistes de Peter Carlsen - Journal du Design.jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 3</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2023-11-22 • Categoría: Investigación</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="descargar (7).jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 4</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-09-01 • Categoría: Multimedia</div>
+          </div>
+        </article>
+
+      </div>
+
+      
+    </footer>
+
+  </div>
+</body>
+</html>
+    '''
+    html += '''
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portafolio — Plantilla de examen</title>
+  <style>
+    /* Reset sencillo */
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --accent:#0b6cff;
+      --muted:#6b7280;
+      --radius:12px;
+      --gap:1.25rem;
+      --maxw:1100px;
+      --pad:1rem;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+      padding:2rem 1rem;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* Contenedor principal centrado */
+    .site{
+      width:100%;
+      max-width:var(--maxw);
+      display:flex;
+      flex-direction:column;
+      gap:var(--gap);
+    }
+
+    /* ------------------ HEADER (Flexbox) ------------------ */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:calc(var(--pad) * 1.25);
+      background:linear-gradient(90deg, rgba(11,108,255,0.06), rgba(11,108,255,0.03));
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(11,108,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+
+    .brand{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#2ea3ff);
+      display:grid;place-items:center;color:white;font-weight:700;
+      font-size:1.05rem;
+      box-shadow:0 6px 12px rgba(2,6,23,0.06);
+    }
+    nav{display:flex;gap:1rem;align-items:center}
+    nav a{font-size:.95rem;text-decoration:none;color:var(--muted)}
+    nav a.primary{color:var(--accent);font-weight:600}
+
+    /* ------------------ MAIN (Grid) ------------------ */
+    main{
+      display:grid;
+      grid-template-columns:1fr 340px; /* contenido + barra lateral */
+      gap:var(--gap);
+      align-items:start;
+    }
+
+    /* Galería de tarjetas - justamente aqui utiliza Grid */
+    .gallery{
+      background:transparent;
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+      gap:1rem;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:10px;
+      padding:0.6rem;
+      box-shadow:0 6px 18px rgba(12,20,40,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+      min-height:220px;
+    }
+
+    .thumb{
+      width:100%;
+      aspect-ratio:16/9;
+      background:linear-gradient(90deg, #e6eefc, #f7f9ff);
+      border-radius:8px;
+      display:block;
+      overflow:hidden;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .card h3{margin:.2rem 0 .1rem 0;font-size:1rem}
+    .card p{margin:0;font-size:.9rem;color:var(--muted)}
+
+    .meta{
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+      font-size:.8rem;color:var(--muted);
+    }
+    .chip{
+      padding:.25rem .5rem;border-radius:999px;background:#f1f5f9;font-weight:600;font-size:.78rem
+    }
+
+    /* ------------------ SIDEBAR simple ------------------ */
+    aside{
+      background:var(--card);
+      padding:1rem;border-radius:10px;box-shadow:0 6px 18px rgba(12,20,40,0.04);
+      height:fit-content;
+    }
+    .profile{display:flex;gap:.75rem;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#dbeafe,#bfdbfe);display:grid;place-items:center}
+    .profile small{display:block;color:var(--muted)}
+
+    /* ------------------ FOOTER (Flexbox + artículos replicados)
+       El enunciado dice que dentro del footer debe haber un article de muestra con
+       título, descripción, fecha, categoría e imagen. Aquí he replicado varios articulos
+       para dar sensación de muchos artículos. */
+    footer{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      padding:1rem;
+      border-radius:var(--radius);
+    }
+
+    .footer-articles{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:0.8rem;
+    }
+
+    footer article{
+      background:var(--card);
+      padding:.6rem;border-radius:10px;display:flex;gap:.5rem;align-items:flex-start;box-shadow:0 6px 12px rgba(2,6,23,0.04)
+    }
+    footer article .f-thumb{width:80px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f3f4f6}
+    footer article h4{margin:0;font-size:.95rem}
+    footer article p{margin:0;font-size:.82rem;color:var(--muted)}
+    footer article .f-meta{font-size:.78rem;color:var(--muted);margin-top:.25rem}
+
+    /* ------------------ RESPONSIVE adjustments ------------------ */
+    @media (max-width:900px){
+      main{grid-template-columns:1fr}
+    }
+    @media (max-width:540px){
+      header{flex-direction:column;align-items:flex-start}
+      .logo{width:44px;height:44px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <!-- HEADER: logo + navegación (Flexbox) -->
+    <header>
+      <div class="brand">
+        <div class="logo">AS</div>
+        <div>
+          <div style="font-weight:700">Alex Sytnyk</div>
+          <small style="color:var(--muted)">Diseñador • Desarrollador</small>
+        </div>
+      </div>
+      <nav aria-label="Navegación principal">
+        <a href="#">Inicio</a>
+        <a href="#portfolio" class="primary">Portfolio</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <!-- MAIN: galería de piezas (Grid) + sidebar -->
+    <main>
+      <section>
+        <h2 style="margin:0 0 .75rem 0">Proyectos destacados</h2>
+        <div class="gallery" id="portfolio">
+
+          <!-- v1.0: Una tarjeta de ejemplo. v1.3: Replicar varias veces para similitud de muchos elementos -->
+          <article class="card">
+            <div class="thumb"><img src="descargar (1).jpeg" alt="miniatura proyecto 1"></div>
+            <h3>Proyecto 1</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Mar 2024</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (2).jpeg" alt="miniatura proyecto 2"></div>
+            <h3>Proyecto 2</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Jun 2024</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (3).jpeg" alt="miniatura proyecto 3"></div>
+            <h3>Proyecto 3</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Nov 2023</span></div>
+          </article>
+
+          <!-- Más tarjetas replicadas para "sensación de muchos artículos" -->
+          <article class="card">
+            <div class="thumb"><img src="descargar (4).jpeg" alt="miniatura proyecto 4"></div>
+            <h3>Proyecto 4</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>Dic 2023</span></div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="descargar (6).jpeg" alt="miniatura proyecto 5"></div>
+            <h3>Proyecto 5</h3>
+            <p>Descripción</p>
+            <div class="meta"><span>May 2024</span></div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- SIDEBAR: información breve del autor -->
+      <aside>
+        <div class="profile">
+          <div class="avatar">AS</div>
+          <div>
+            <strong>Alex Sytnyk</strong>
+            <small>Valencia • Estudiante • CEAC FP</small>
+          </div>
+        </div>
+        <hr style="margin:.75rem 0">
+        <p style="margin:0;color:var(--muted);font-size:.94rem">Herramientas: HTML5 • CSS3 (Flexbox/Grid) • JS básico</p>
+      </aside>
+
+    </main>
+
+    <!-- FOOTER: contiene artículos replicados con datos pedidos en el enunciado -->
+    <footer>
+      <h3 style="margin:0">Archivo: últimas piezas</h3>
+      <div class="footer-articles">
+
+        <!-- ARTICLE DE MUESTRA (repetido varias veces) -->
+        <article>
+          <div class="f-thumb"><img src="descargar (5).jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 1</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-03-12 • Categoría: Diseño</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="descargar.jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 2</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-06-02 • Categoría: Desarrollo</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="Entre art et architecture, les mondes surréalistes de Peter Carlsen - Journal du Design.jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 3</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2023-11-22 • Categoría: Investigación</div>
+          </div>
+        </article>
+
+        <article>
+          <div class="f-thumb"><img src="descargar (7).jpeg" alt="mini"></div>
+          <div>
+            <h4>Título de la pieza 4</h4>
+            <p>Descripción corta que resume el objetivo de la pieza y su alcance.</p>
+            <div class="f-meta">Fecha: 2024-09-01 • Categoría: Multimedia</div>
+          </div>
+        </article>
+
+      </div>
+
+      
+    </footer>
+
+  </div>
+</body>
+</html>
+    '''
+    for p in piezas:
+        html += f"<div class='card'><h3>{p['titulo']}</h3><p>{p['descripcion']}</p><small>{p['fecha']}</small></div>"
+    html += "</div></body></html>"
+    return html
+
+if __name__ == "__main__":
+    app.run(debug=True)
