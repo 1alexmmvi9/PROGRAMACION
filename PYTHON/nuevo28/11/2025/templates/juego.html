@@ -1,10 +1,36 @@
 <!doctype html>
 <html>
   <head>
+    <style>
+      .npc{
+        width:20px;height:20px;background:red;
+        border-radius:20px;position:absolute;
+      }
+    </style>
   </head>
  	<body>	
+    <main>
+    </main>
     <script>
+      // Cojo el contenedor
+      let escenario = document.querySelector("main")
+     	// Me conecto a una api, pido datos, los convierto a json, y los lanzo
      	fetch("http://127.0.0.1:5000/api")
+      .then(function(respuesta){return respuesta.json();})
+      .then(function(datos){
+        // Para cada npc:
+      	datos.forEach(function(npc){
+          // Creo un nuevo elemento en HTML
+        	let personaje = document.createElement("div")
+          // Le añado una clase css
+          personaje.classList.add("npc")
+          // La posicion x en HTML sera la posicion x que viene de Python
+          personaje.style.left = npc.posx+"px"
+          // La posicion y en HTML será la posición y que viene de Python
+          personaje.style.top = npc.posy+"px"
+          escenario.appendChild(personaje)
+        })
+      })
     </script>
   </body>
 </html>

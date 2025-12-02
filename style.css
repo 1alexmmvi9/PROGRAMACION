@@ -1,0 +1,386 @@
+/* Variables de color */
+:root {
+    --dark-bg: #1a1a1a;
+    --dark-text: #e0e0e0;
+    --dark-secondary-bg: #2a2a2a;
+    --dark-border: rgba(255, 255, 255, 0.1);
+    --dark-liquid-button-bg: rgba(255, 255, 255, 0.08);
+    --dark-liquid-button-hover-bg: rgba(255, 255, 255, 0.15);
+    --dark-liquid-button-border: rgba(255, 255, 255, 0.2);
+
+    --light-bg: #f0f0f0;
+    --light-text: #333;
+    --light-secondary-bg: #ffffff;
+    --light-border: rgba(0, 0, 0, 0.1);
+    --light-liquid-button-bg: rgba(0, 0, 0, 0.05);
+    --light-liquid-button-hover-bg: rgba(0, 0, 0, 0.1);
+    --light-liquid-button-border: rgba(0, 0, 0, 0.15);
+
+    --accent-color: #ff8c00; /* Naranja */
+    --font-family: 'Inter', sans-serif;
+}
+
+/* Modo oscuro por defecto */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode header,
+body.dark-mode .project-card {
+    background-color: var(--dark-secondary-bg);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .liquid-button {
+    background: var(--dark-liquid-button-bg);
+    border: 1px solid var(--dark-liquid-button-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode .liquid-button:hover {
+    background: var(--dark-liquid-button-hover-bg);
+}
+
+/* Modo claro */
+body.light-mode {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+body.light-mode header,
+body.light-mode .project-card {
+    background-color: var(--light-secondary-bg);
+    border: 1px solid var(--light-border);
+}
+
+body.light-mode .liquid-button {
+    background: var(--light-liquid-button-bg);
+    border: 1px solid var(--light-liquid-button-border);
+    color: var(--light-text);
+}
+
+body.light-mode .liquid-button:hover {
+    background: var(--light-liquid-button-hover-bg);
+}
+
+
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header y Navegación */
+header {
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* Efecto liquid glass para el header */
+    -webkit-backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Botones Liquid Glass */
+.liquid-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.liquid-button.primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+    text-shadow: none;
+}
+
+.liquid-button.primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* Contenido Principal */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 5%;
+}
+
+section {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.85; /* Poco contraste */
+}
+
+/* Sección Sobre Mí con párrafos dinámicos */
+.about-content p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding: 0 10%;
+}
+
+
+/* Grid de Proyectos */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.project-card {
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: left;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.project-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+}
+
+.project-card p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+}
+
+.project-card .liquid-button {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Switch de Modo Oscuro/Claro */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--dark-liquid-button-bg); /* Fondo del switch */
+    border: 1px solid var(--dark-liquid-button-border);
+    transition: .4s;
+}
+
+body.light-mode .slider {
+    background-color: var(--light-liquid-button-bg);
+    border: 1px solid var(--light-liquid-button-border);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--accent-color);
+    transition: .4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+input:checked + .slider {
+    background-color: var(--dark-liquid-button-bg);
+    border: 1px solid var(--dark-liquid-button-border);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Iconos dentro del switch */
+.slider .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    transition: opacity 0.4s ease;
+}
+
+.slider .sun {
+    left: 8px;
+    opacity: 0;
+}
+
+.slider .moon {
+    right: 8px;
+    opacity: 1;
+}
+
+input:checked + .slider .sun {
+    opacity: 1;
+}
+
+input:checked + .slider .moon {
+    opacity: 0;
+}
+
+/* Ajustes para modo claro en los iconos del switch */
+body.light-mode .slider .sun {
+    color: var(--light-text);
+}
+body.light-mode .slider .moon {
+    color: var(--light-text);
+}
+
+/* Cuando el switch está activado (modo oscuro), el sol se muestra y la luna se oculta */
+body.dark-mode .slider .sun {
+    opacity: 1;
+}
+body.dark-mode .slider .moon {
+    opacity: 0;
+}
+
+/* Cuando el switch está desactivado (modo claro), el sol se oculta y la luna se muestra */
+body.light-mode .slider .sun {
+    opacity: 0;
+}
+body.light-mode .slider .moon {
+    opacity: 1;
+}
+
+/* La bolita del switch */
+.slider:before {
+    background-color: var(--accent-color); /* Color de la bolita */
+}
+
+/* Asegúrate de que los iconos dentro del slider tengan el color correcto */
+.slider .icon {
+    color: var(--dark-text); /* Color por defecto para los iconos en modo oscuro */
+}
+
+body.light-mode .slider .icon {
+    color: var(--light-text); /* Color para los iconos en modo claro */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* O puedes implementar un menú hamburguesa */
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
