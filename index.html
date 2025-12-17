@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Oleksandr Sytnyk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <header>
+        <nav>
+            <div class="logo">Oleksandr Sytnyk</div>
+            <ul class="nav-links">
+                <li><a href="#about" class="liquid-button">Sobre Mí</a></li>
+                <li><a href="#projects" class="liquid-button">Proyectos</a></li>
+                <li><a href="#contact" class="liquid-button">Contacto</a></li>
+                <!-- Aquí puedes añadir tu link de Etsy -->
+                <li><a href="URL_DE_TU_TIENDA_ETSY" class="liquid-button" target="_blank">Mi Tienda Etsy</a></li>
+            </ul>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" checked />
+                    <div class="slider round">
+                        <span class="icon sun">☀️</span>
+                        <span class="icon moon">🌙</span>
+                    </div>
+                </label>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Hola, soy Oleksandr Sytnyk</h1>
+            <p>Diseñador y Desarrollador con pasión por crear experiencias digitales.</p>
+            <a href="#projects" class="liquid-button primary">Ver Proyectos</a>
+        </section>
+
+        <section id="about">
+            <h2>Sobre Mí</h2>
+            <div class="about-content">
+                <p>
+                    Aquí irá el primer párrafo sobre ti. Puedes hablar de tu experiencia profesional, tus habilidades clave, o tu filosofía de diseño. Este texto está diseñado para ser conciso y directo, manteniendo la estética general de la web.
+                </p>
+                <p>
+                    Este es el segundo párrafo. Aquí podrías expandir sobre tus intereses, tus pasiones fuera del trabajo, o cómo abordas los nuevos desafíos. La idea es que cada párrafo sea una pieza manejable de información.
+                </p>
+                <p>
+                    Y este es el tercer párrafo. Podrías usarlo para mencionar tus objetivos a futuro, el tipo de proyectos en los que te gustaría trabajar, o una llamada a la acción para contactarte. Recuerda que puedes modificar libremente estos textos.
+                </p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Proyectos</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Proyecto 1</h3>
+                    <p>Breve descripción del Proyecto 1. Tecnologías usadas y rol.</p>
+                    <a href="#" class="liquid-button">Ver Proyecto</a>
+                </div>
+                <div class="project-card">
+                    <h3>Proyecto 2</h3>
+                    <p>Breve descripción del Proyecto 2. Tecnologías usadas y rol.</p>
+                    <a href="#" class="liquid-button">Ver Proyecto</a>
+                </div>
+                <div class="project-card">
+                    <h3>Proyecto 3</h3>
+                    <p>Breve descripción del Proyecto 3. Tecnologías usadas y rol.</p>
+                    <a href="#" class="liquid-button">Ver Proyecto</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contacto</h2>
+            <p>¿Interesado en colaborar o simplemente saludar? ¡No dudes en contactarme!</p>
+            <a href="mailto:tuemail@example.com" class="liquid-button primary">Enviar un Email</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Oleksandr Sytnyk. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const checkbox = document.getElementById('checkbox');
+        const body = document.body;
+
+        // Set initial mode based on localStorage or default to dark
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+        if (currentTheme) {
+            body.className = currentTheme;
+            checkbox.checked = (currentTheme === 'dark-mode');
+        } else {
+            body.className = 'dark-mode'; // Default to dark mode
+            checkbox.checked = true;
+        }
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                body.className = 'dark-mode';
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                body.className = 'light-mode';
+                localStorage.setItem('theme', 'light-mode');
+            }
+        });
+    </script>
+</body>
+</html>
